@@ -1,15 +1,29 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import { Message } from "../../components/Message";
 
 export default function ChatView() {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    document.cookie = "username=; Max-Age=0";
+    router.replace("/");
+  };
+
   return (
     <main className="text-sm w-full h-screen flex justify-center items-center">
       <div className="w-full h-full flex flex-col overflow-hidden">
-        <div className="text-xs mb-2 p-2 px-3 bg-stone-800 flex justify-between items-center">
+        <div className="text-xs p-2 px-3 bg-stone-800 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-green-500 rounded-sm"></div>
-            <p className="font-medium">47 online</p>
+            <p className="font-medium">2 online</p>
           </div>
-          <button className="text-stone-300 hover:text-stone-100 focus:text-stone-100 w-8 h-8 bg-stone-700 rounded-md flex justify-center items-center transition">
+          <button
+            title="logout"
+            className="text-stone-400 hover:text-red-500 focus:text-red-500 w-8 h-8 hover:bg-red-500/25 focus:bg-red-500/25 hover:bg-stone-700 rounded-md flex justify-center items-center transition outline-none"
+            onClick={handleLogout}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -21,21 +35,26 @@ export default function ChatView() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
               />
             </svg>
           </button>
         </div>
-        <div className="flex flex-col flex-1 gap-4 p-3">
-          <Message />
-          <Message />
+        <div className="flex flex-col flex-1 gap-4 pt-3 px-3 overflow-y-scroll">
+          <Message
+            username="Jorge Reyes"
+            message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus nisl tincidunt eget nullam non nisi. Aenean et tortor at risus viverra adipiscing at in tellus. Praesent elementum facilisis leo vel fringilla est ullamcorper eget nulla. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Nunc sed blandit libero volutpat sed cras ornare arcu. Semper risus in hendrerit gravida rutrum quisque non. Accumsan tortor posuere ac ut consequat semper viverra. Ultricies tristique nulla aliquet enim tortor at auctor urna. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Tellus at urna condimentum mattis pellentesque id. Mauris vitae ultricies leo integer malesuada nunc. Fringilla phasellus faucibus scelerisque eleifend donec. Amet luctus venenatis lectus magna fringilla urna. Id venenatis a condimentum vitae sapien pellentesque."
+            date={new Date().toLocaleTimeString()}
+          />
+          {Array.from({ length: 50 }).map((_) => (
+            <Message
+              username="Pablo Rosas"
+              message="Hola Jorge, yo estoy conectado!"
+              date={new Date().toLocaleTimeString()}
+            />
+          ))}
         </div>
-        <form className="w-full p-4 flex items-center gap-4">
+        <form className="w-full p-4 flex items-center gap-4 border-t border-stone-800">
           <input
             type="text"
             className="flex-1 p-3 bg-transparent border border-stone-800 rounded-lg outline-none hover:border-stone-700 focus:border-stone-600 shadow-lg"
