@@ -10,12 +10,10 @@ export function useSocket() {
       .filter((cookie) => cookie.includes("username"))[0]
       .split("=")[1];
 
-    const URL =
-      process.env.NODE_ENV === "production"
-        ? undefined
-        : "http://localhost:4000";
-
-    const ioSocket = io("http://localhost:4000", {
+    const URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+    console.log(URL);
+      
+    const ioSocket = io(URL, {
       auth: {
         username: username,
       },
