@@ -5,13 +5,10 @@ export function useSocket() {
   const [socket, setSocket] = useState<Socket>();
 
   useEffect(() => {
-    const username = document.cookie
-      .split(";")
-      .filter((cookie) => cookie.includes("username"))[0]
-      .split("=")[1];
+    const username = localStorage.getItem("username") || "Anonymous";
 
     const URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
-      
+
     const ioSocket = io(URL, {
       auth: {
         username: username,
