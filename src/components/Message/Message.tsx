@@ -23,7 +23,9 @@ export function Message({ username, message, date }: MessageProps) {
       <div className="w-full flex flex-col gap-1">
         <div className="flex items-center justify-between gap-2">
           <h4 className="text-stone-600 text-md font-medium">{username}</h4>
-          <p className="text-stone-700 text-xs font-medium">{date}</p>
+          <p className="text-stone-700 text-xs font-medium">
+            {new Date(date).toLocaleTimeString()}
+          </p>
         </div>
         <p className="text-stone-200 text-md font-light leading-normal">
           {message}

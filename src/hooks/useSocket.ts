@@ -10,8 +10,7 @@ export function useSocket() {
       .filter((cookie) => cookie.includes("username"))[0]
       .split("=")[1];
 
-    const URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
-    console.log(URL);
+    const URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
       
     const ioSocket = io(URL, {
       auth: {
