@@ -62,7 +62,7 @@ export default function ChatView() {
   return (
     <main className="text-sm w-full h-screen flex justify-center items-center">
       <div className="w-full h-full flex flex-col overflow-hidden">
-        <div className="text-xs p-2 px-3 bg-stone-800 flex justify-between items-center">
+        <div className="text-xs p-3 bg-stone-800 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-green-500 rounded-sm"></div>
             <p className="font-medium">{onlineUsers} online</p>
